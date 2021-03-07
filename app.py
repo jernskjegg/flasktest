@@ -1,10 +1,12 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, url_for, redirect, render_template
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///C:Users\\murdoch1\\flask\\flaskproj\\flaskproject1\\db.sqlite3"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 @app.route("/")
 def index():
-    return "<h1>Works</h1>"
+    return "<h1> H U Z Z A H </h1>"
 
 @app.route("/home")
 def home():
@@ -39,8 +41,10 @@ def form_get():
 @app.route("/form", methods=["POST"])
 def form_post():
     user_potato = request.form["user_input"]
-    return f"<h1> The user input was: { user_potato }</h1>"
+    #return f"<h1> The user input was: { user_potato }</h1>"
+    return redirect(url_for("home"))
 
 @app.route("/accept_json", methods= ["POST"])
 def accept_json():
     return jsonify({"resuts" : "Done"})
+
